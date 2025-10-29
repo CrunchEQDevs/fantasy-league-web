@@ -1,0 +1,94 @@
+import 'dart:developer' as developer;
+
+class ScoreBatMatch {
+  final String title;
+  final String competition;
+  final DateTime date;
+  final List<VideoHighlight> videos;
+  final String? thumbnail;
+
+  ScoreBatMatch({
+    required this.title,
+    required this.competition,
+    required this.date,
+    required this.videos,
+    this.thumbnail,
+  });
+
+  factory ScoreBatMatch.fromJson(Map<String, dynamic> json) {
+    // Tratamento seguro do parsing da data
+    DateTime parsedDate;
+    try {
+      if (json['date'] != null) {
+        parsedDate = DateTime.parse(json['date']);
+      } else {
+        developer.log('Warning: Data ausente no JSON, usando data atual', name: 'ScoreBatMatch');
+        parsedDate = DateTime.now();
+      }
+    } catch (e) {
+      developer.log('Erro ao fazer parse da data: ${json['date']}, erro: $e', name: 'ScoreBatMatch', error: e);
+      parsedDate = DateTime.now();
+    }
+
+    // Tratamento seguro do parsing dos vídeos
+    List<VideoHighlight> parsedVideos = [];
+    try {
+      if (json['videos'] != null && json['videos'] is List) {
+        parsedVideos = (json['videos'] as List)
+            .map((v) {
+              try {
+                return VideoHighlight.fromJson(v as Map<String, dynamic>);
+              } catch (e) {
+                developer.log('Erro ao fazer parse de vídeo: $e', name: 'ScoreBatMatch', error: e);
+                return null;
+              }
+            })
+            .whereType<VideoHighlight>()
+            .toList();
+      }
+    } catch (e) {
+      developer.log('Erro ao processar lista de vídeos: $e', name: 'ScoreBatMatch', error: e);
+    }
+
+    // Tratamento da competition que pode ser String ou Object
+    String competitionName;
+    try {
+      if (json['competition'] is Map) {
+        competitionName = json['competition']['name']?.toString() ?? 'Competição não disponível';
+      } else {
+        competitionName = json['competition']?.toString() ?? 'Competição não disponível';
+      }
+    } catch (e) {
+      developer.log('Erro ao processar competition: $e', name: 'ScoreBatMatch', error: e);
+      competitionName = 'Competição não disponível';
+    }
+
+    return ScoreBatMatch(
+      title: json['title']?.toString() ?? 'Título não disponível',
+      competition: competitionName,
+      date: parsedDate,
+      videos: parsedVideos,
+      thumbnail: json['thumbnail']?.toString(),
+    );
+  }
+}
+
+class VideoHighlight {
+  final String title;
+  final String embed;
+  final String? url;
+
+  VideoHighlight({
+    required this.title,
+    required this.embed,
+    this.url,
+  });
+
+  factory VideoHighlight.fromJson(Map<String, dynamic> json) {
+    return VideoHighlight(
+      title: json['title'] ?? '',
+      embed: json['embed'] ?? '',
+      url: json['url'],
+    );
+  }
+}

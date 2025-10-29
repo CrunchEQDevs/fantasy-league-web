@@ -1,0 +1,108 @@
+import 'dart:convert';
+import 'dart:developer' as developer;
+import 'package:http/http.dart' as http;
+import '../models/scorebat_match.dart';
+
+class ScoreBatProvider {
+  static const String _baseUrl = 'https://www.scorebat.com/video-api/v3';
+
+  Future<List<ScoreBatMatch>> getLatestMatches() async {
+    try {
+      developer.log('Iniciando requisição para ScoreBat API', name: 'ScoreBatProvider');
+
+      final response = await http.get(
+        Uri.parse('$_baseUrl/feed/'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw Exception('Timeout ao buscar dados da API ScoreBat');
+        },
+      );
+
+      developer.log('Status da resposta: ${response.statusCode}', name: 'ScoreBatProvider');
+
+      if (response.statusCode == 200) {
+        // Validação do corpo da resposta
+        if (response.body.isEmpty) {
+          developer.log('Resposta vazia da API', name: 'ScoreBatProvider');
+          return [];
+        }
+
+        final data = json.decode(response.body);
+
+        // Validação da estrutura do JSON
+        if (data == null) {
+          developer.log('JSON decode retornou null', name: 'ScoreBatProvider');
+          return [];
+        }
+
+        // A API ScoreBat pode retornar dados diretamente em uma lista ou em um campo 'response'
+        final List matchesJson;
+        if (data is List) {
+          matchesJson = data;
+        } else if (data is Map && data.containsKey('response')) {
+          matchesJson = data['response'] ?? [];
+        } else {
+          developer.log('Estrutura inesperada do JSON: ${data.runtimeType}', name: 'ScoreBatProvider');
+          return [];
+        }
+
+        developer.log('Total de partidas encontradas: ${matchesJson.length}', name: 'ScoreBatProvider');
+
+        // Parse com tratamento de erros individual
+        final matches = <ScoreBatMatch>[];
+        for (var i = 0; i < matchesJson.length; i++) {
+          try {
+            final match = ScoreBatMatch.fromJson(matchesJson[i] as Map<String, dynamic>);
+            matches.add(match);
+          } catch (e) {
+            developer.log('Erro ao processar partida $i: $e', name: 'ScoreBatProvider', error: e);
+            // Continua processando as outras partidas
+          }
+        }
+
+        developer.log('Total de partidas processadas com sucesso: ${matches.length}', name: 'ScoreBatProvider');
+        return matches;
+      } else {
+        final errorMsg = 'Erro ao carregar jogos: ${response.statusCode} - ${response.reasonPhrase}';
+        developer.log(errorMsg, name: 'ScoreBatProvider');
+        throw Exception(errorMsg);
+      }
+    } catch (e, stackTrace) {
+      developer.log(
+        'Erro no ScoreBatProvider',
+        name: 'ScoreBatProvider',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
+  }
+
+  Future<List<ScoreBatMatch>> getMatchesByCompetition(String competition) async {
+    try {
+      developer.log('Buscando partidas da competição: $competition', name: 'ScoreBatProvider');
+      final matches = await getLatestMatches();
+
+      final filtered = matches
+          .where((match) => match.competition
+              .toLowerCase()
+              .contains(competition.toLowerCase()))
+          .toList();
+
+      developer.log('Partidas encontradas para $competition: ${filtered.length}', name: 'ScoreBatProvider');
+      return filtered;
+    } catch (e, stackTrace) {
+      developer.log(
+        'Erro ao buscar partidas por competição',
+        name: 'ScoreBatProvider',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
+  }
+}
