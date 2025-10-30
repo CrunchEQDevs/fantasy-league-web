@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "232707951799",
+    "project_id": "fantasy-league-aa43f",
+    "storage_bucket": "fantasy-league-aa43f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232707951799:android:d198303f3f25ab33049132",
+        "android_client_info": {
+          "package_name": "com.fantasyleague.fantasy_league"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiXE5MaCr9bKPTu9C2DwhFK4cyOdtdzcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

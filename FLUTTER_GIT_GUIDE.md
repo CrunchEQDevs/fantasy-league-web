@@ -31,6 +31,8 @@ flutter analyze
 ### 2. Formatação de Código
 ```bash
 flutter format .
+dart format .
+
 ```
 - Formata todo o código seguindo o style guide do Dart
 - Garante consistência no código
@@ -38,6 +40,8 @@ flutter format .
 ### 3. Testes (se existirem)
 ```bash
 flutter test
+Test directory "test" not found.
+
 ```
 - Roda todos os testes do projeto
 - **Importante:** garantir que todos os testes passem
@@ -164,3 +168,14 @@ git push
 3. **Pre-commit hooks**: Configure hooks para rodar `flutter analyze` automaticamente
 
 4. **CI/CD**: Configure GitHub Actions para rodar testes automaticamente
+
+
+PARA BOUBLICAER NA VERSAO WEB 
+
+
+
+flutter build web --release
+cd build/web
+git add .
+git commit -m "update web build"
+git push

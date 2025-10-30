@@ -57,7 +57,7 @@ class CustomDrawer extends StatelessWidget {
               ),
               onTap: () {
                 // Navegar para a tela da Premier League
-                Navigator.pushNamed(context, '/premier-league');
+                Navigator.pushNamed(context, '/');
               },
             ),
             ListTile(
@@ -71,7 +71,7 @@ class CustomDrawer extends StatelessWidget {
               ),
               onTap: () {
                 // Navegar para a tela da La Liga
-                Navigator.pushNamed(context, '/la-liga');
+                Navigator.pushNamed(context, '/');
               },
             ),
             ListTile(
@@ -85,23 +85,86 @@ class CustomDrawer extends StatelessWidget {
               ),
               onTap: () {
                 // Navegar para a tela do Brasileirão
-                Navigator.pushNamed(context, '/brasileirao');
+                Navigator.pushNamed(context, '/');
               },
             ),
-            
-            Spacer(),
+
+    // Botao + Campos extras futebol
+        
+            SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(16.0),
               
               child: BottomHome(
                 text: 'Monte sua Liga',
                 onPressed: () {
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushNamed(context, '/monte_league');
                 },
                 backgroundColor: const Color(0xFFED4F00),
                 textColor:Colors.white,
               ),
             ),
+
+            ListTile(
+              
+              title: Text(
+                '⚽        Jogos da semana',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, '/game_the_week');
+              },
+            ),
+
+            ListTile(
+              leading: Icon(Icons.assist_walker_rounded, color: Colors.white,),
+              title: Text(
+                'lesionados da semana',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, '/injured_the_week');
+              },
+            ),
+
+
+      // Login e criar conta 
+            ListTile(
+              contentPadding: EdgeInsets.only(left: 16.0, top: 90.0,),
+              leading: Icon(Icons.account_circle_outlined, color: Colors.white,),
+              title: Text(
+                'Login',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                // Navegar para a tela de login
+                Navigator.pushNamed(context, '/');
+              },
+            ),
+              ListTile(
+              leading: const Icon(Icons.person_add, color: Colors.white),
+              title: Text(
+                'Crie sua conta',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                // Navegar para a Criar conta 
+                Navigator.pushNamed(context, '/');
+              },
+            ),
+            
             // Adicione aqui seus itens de menu quando precisar
             // Exemplo:
             // ListTile(

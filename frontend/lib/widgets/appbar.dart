@@ -12,52 +12,123 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isWeb = screenWidth > 900;
+    final isLargeScreen = screenWidth > 1400; // Telas grandes (desktop)
+    final isMediumScreen = screenWidth > 900 && screenWidth <= 1400; // Telas médias
 
     if (isWeb) {
       // AppBar para Web - com navbar horizontal
       return AppBar(
-        automaticallyImplyLeading: false, // Remove o ícone do drawer
-        title: Row(
-          children: [
-            // Logo à esquerda
-            Image.asset(
-              'assets/logo.png',
-              height: 32,
-            ),
-            const SizedBox(width: 12),
-            const Text(
-              'Fantasy League',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+        automaticallyImplyLeading: false,
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              // Logo à esquerda
+              Image.asset(
+                'assets/logo.png',
+                height: 32,
               ),
-            ),
-            const Spacer(),
-            // Links de navegação no centro/direita
-            _buildNavLink(context, 'Premier League', '/premier-league', Icons.sports_soccer),
-            const SizedBox(width: 24),
-            _buildNavLink(context, 'La Liga', '/la-liga', Icons.sports_soccer),
-            const SizedBox(width: 24),
-            _buildNavLink(context, 'Brasileirão', '/brasileirao', Icons.sports_soccer),
-            const SizedBox(width: 32),
-            // Botão de ação
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/monte_league');
-              },
-              icon: const Icon(Icons.add, size: 18),
-              label: const Text('Monte sua Liga'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFED4F00),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+              SizedBox(width: isLargeScreen ? 12 : 8),
+              Text(
+                'Fantasy League',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: isLargeScreen ? 20 : 18,
                 ),
               ),
-            ),
-            const SizedBox(width: 16),
-          ],
+              SizedBox(width: isLargeScreen ? 40 : 20),
+
+              // Links de navegação - Ligas
+              _buildNavLink(
+                context,
+                isLargeScreen ? 'Premier League' : 'Premier',
+                '/',
+                Icons.sports_soccer,
+                showLabel: isLargeScreen || isMediumScreen,
+              ),
+              SizedBox(width: isLargeScreen ? 24 : 16),
+              _buildNavLink(
+                context,
+                isLargeScreen ? 'La Liga' : 'La Liga',
+                '/',
+                Icons.sports_soccer,
+                showLabel: isLargeScreen || isMediumScreen,
+              ),
+              SizedBox(width: isLargeScreen ? 24 : 16),
+              _buildNavLink(
+                context,
+                isLargeScreen ? 'Brasileirão' : 'Brasileiro',
+                '/',
+                Icons.sports_soccer,
+                showLabel: isLargeScreen || isMediumScreen,
+              ),
+              SizedBox(width: isLargeScreen ? 32 : 20),
+
+              // Botão de ação
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/monte_league');
+                },
+                icon: const Icon(Icons.add, size: 18),
+                label: Text(
+                  isLargeScreen ? 'Monte sua Liga' : 'Monte Liga',
+                  style: TextStyle(fontSize: isLargeScreen ? 14 : 12),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFED4F00),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isLargeScreen ? 20 : 12,
+                    vertical: isLargeScreen ? 12 : 10,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              SizedBox(width: isLargeScreen ? 24 : 16),
+
+              // Jogos da semana
+              _buildNavLink(
+                context,
+                isLargeScreen ? 'Jogos da semana' : 'Jogos',
+                '/game_the_week',
+                Icons.sports_soccer,
+                showLabel: true,
+              ),
+              SizedBox(width: isLargeScreen ? 24 : 16),
+
+              // Lesionados da semana
+              _buildNavLink(
+                context,
+                isLargeScreen ? 'Lesionados' : 'Lesões',
+                '/injured_the_week',
+                Icons.assist_walker_rounded,
+                showLabel: true,
+              ),
+              SizedBox(width: isLargeScreen ? 32 : 20),
+
+              // Login
+              _buildNavLink(
+                context,
+                'Login',
+                '/',
+                Icons.account_circle_outlined,
+                showLabel: isLargeScreen,
+              ),
+              SizedBox(width: isLargeScreen ? 16 : 12),
+
+              // Criar conta
+              _buildNavLink(
+                context,
+                isLargeScreen ? 'Criar conta' : 'Criar',
+                '/',
+                Icons.person_add,
+                showLabel: isLargeScreen,
+              ),
+              const SizedBox(width: 16),
+            ],
+          ),
         ),
       );
     } else {
@@ -77,26 +148,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
   }
 
-  Widget _buildNavLink(BuildContext context, String label, String route, IconData icon) {
+  Widget _buildNavLink(
+    BuildContext context,
+    String label,
+    String route,
+    IconData icon, {
+    bool showLabel = true,
+  }) {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, route);
       },
       borderRadius: BorderRadius.circular(8),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, size: 18, color: const Color(0xFFED4F00)),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
+            if (showLabel) ...[
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
+            ],
           ],
         ),
       ),
