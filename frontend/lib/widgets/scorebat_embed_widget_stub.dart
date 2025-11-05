@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class ScoreBatWebEmbed extends StatelessWidget {
   final String url;
 
-  const ScoreBatWebEmbed({
-    super.key,
-    required this.url,
-  });
+  const ScoreBatWebEmbed({super.key, required this.url});
 
   @override
   Widget build(BuildContext context) {

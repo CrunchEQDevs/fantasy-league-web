@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'scorebat_embed_widget_web.dart' if (dart.library.io) 'scorebat_embed_widget_stub.dart';
+import 'scorebat_embed_widget_web.dart'
+    if (dart.library.io) 'scorebat_embed_widget_stub.dart';
 
 /// Widget que carrega o feed oficial do ScoreBat usando embed
 /// Esta é a solução oficial e mantida pelo ScoreBat
@@ -9,10 +10,7 @@ import 'scorebat_embed_widget_web.dart' if (dart.library.io) 'scorebat_embed_wid
 class ScoreBatEmbedWidget extends StatefulWidget {
   final String? token;
 
-  const ScoreBatEmbedWidget({
-    super.key,
-    this.token,
-  });
+  const ScoreBatEmbedWidget({super.key, this.token});
 
   @override
   State<ScoreBatEmbedWidget> createState() => _ScoreBatEmbedWidgetState();
@@ -31,7 +29,8 @@ class _ScoreBatEmbedWidgetState extends State<ScoreBatEmbedWidget> {
 
     // Token padrão fornecido pelo ScoreBat Widget Builder
     // Você pode gerar seu próprio token em: https://www.scorebat.com/video-api/
-    final token = widget.token ??
+    final token =
+        widget.token ??
         'MjQ4OTg0XzE3NjE3MjkxMzRfNmE2MWE5NDBhNTFkNjJhZGZlZjdjZjBiYjcxMDVkM2EyN2JjMWYyOA==';
 
     _embedUrl = 'https://www.scorebat.com/embed/videofeed/?token=$token';

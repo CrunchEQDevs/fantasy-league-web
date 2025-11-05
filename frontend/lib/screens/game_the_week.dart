@@ -11,12 +11,8 @@ class _GameOfTheWeekScreenState extends State<GameOfTheWeekScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Game of the Week'),
-      ),
-      body: const Center(
-        child: Text('Game of the Week Screen'),
-      ),
+      appBar: AppBar(title: const Text('Game of the Week')),
+      body: const Center(child: Text('Game of the Week Screen')),
     );
   }
 }

@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  const CustomAppBar({
-    super.key,
-    this.title = 'Fantasy League',
-  });
+  const CustomAppBar({super.key, this.title = 'Fantasy League'});
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isWeb = screenWidth > 900;
     final isLargeScreen = screenWidth > 1400; // Telas grandes (desktop)
-    final isMediumScreen = screenWidth > 900 && screenWidth <= 1400; // Telas médias
+    final isMediumScreen =
+        screenWidth > 900 && screenWidth <= 1400; // Telas médias
 
     if (isWeb) {
       // AppBar para Web - com navbar horizontal
@@ -24,10 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             children: [
               // Logo à esquerda
-              Image.asset(
-                'assets/logo.png',
-                height: 32,
-              ),
+              Image.asset('assets/logo.png', height: 32),
               SizedBox(width: isLargeScreen ? 12 : 8),
               Text(
                 'Fantasy League',
@@ -138,10 +133,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/logo.png',
-              height: 20,
-            ),
+            child: Image.asset('assets/logo.png', height: 20),
           ),
         ],
       );

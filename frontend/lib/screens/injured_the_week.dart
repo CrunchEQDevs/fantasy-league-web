@@ -11,12 +11,8 @@ class _InjuredTheWeekScreenState extends State<InjuredTheWeekScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Injured The Week'),
-      ),
-      body: const Center(
-        child: Text('Lesionados da semana'),
-      ),
+      appBar: AppBar(title: const Text('Injured The Week')),
+      body: const Center(child: Text('Lesionados da semana')),
     );
   }
 }

@@ -17,10 +17,7 @@ class _WidgetFooterState extends State<WidgetFooter> {
       child: Center(
         child: Text(
           '© 2024 Fantasy League. Todos os direitos reservados.',
-          style: TextStyle(
-            color: Colors.grey[900],
-            fontSize: 14,
-          ),
+          style: TextStyle(color: Colors.grey[900], fontSize: 14),
         ),
       ),
     );

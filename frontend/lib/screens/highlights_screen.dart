@@ -37,9 +37,7 @@ class HighlightsScreen extends StatelessWidget {
           ),
 
           // Lista completa de highlights
-          const Expanded(
-            child: HighlightsWidget(),
-          ),
+          const Expanded(child: HighlightsWidget()),
         ],
       ),
     );

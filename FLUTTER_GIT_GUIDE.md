@@ -179,3 +179,7 @@ cd build/web
 git add .
 git commit -m "update web build"
 git push
+
+
+envia para a versao web, roda isso e depois o normal.
+flutter build web --release

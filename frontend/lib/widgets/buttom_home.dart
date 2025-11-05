@@ -32,13 +32,10 @@ class BottomHome extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        
+
         child: Text(
           text,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
     );

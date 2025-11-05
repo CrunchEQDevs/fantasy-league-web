@@ -16,10 +16,7 @@ import 'scorebat_embed_widget.dart';
 class HighlightsWidget extends StatelessWidget {
   final String? token;
 
-  const HighlightsWidget({
-    super.key,
-    this.token,
-  });
+  const HighlightsWidget({super.key, this.token});
 
   @override
   Widget build(BuildContext context) {
