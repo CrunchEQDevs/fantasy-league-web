@@ -1,12 +1,12 @@
 {
-  "buildCommand": "cd frontend && flutter build web --release",
+  "buildCommand": "echo 'Using pre-built files'",
   "outputDirectory": "frontend/build/web",
-  "installCommand": "echo 'Flutter should be pre-installed on Vercel'",
+  "installCommand": "",
   "framework": null,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
