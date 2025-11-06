@@ -180,10 +180,12 @@ class _PremiumFieldScreenState extends State<PremiumFieldScreen> {
   }
 
   ImageProvider? get _pitchImage {
-    if (pitchImageUrl != null && pitchImageUrl!.isNotEmpty)
+    if (pitchImageUrl != null && pitchImageUrl!.isNotEmpty) {
       return NetworkImage(pitchImageUrl!);
-    if (pitchImageAsset != null && pitchImageAsset!.isNotEmpty)
+    }
+    if (pitchImageAsset != null && pitchImageAsset!.isNotEmpty) {
       return AssetImage(pitchImageAsset!);
+    }
     return null;
   }
 
