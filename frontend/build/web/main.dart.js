@@ -38368,7 +38368,7 @@ if(r.$2(a,j)>0){s[b]=j
 b=o}}s[b]=a}}
 A.HN.prototype={
 K(a){var s=A.amM(B.yR,null,null,B.DR,B.e,B.Uy,!1)
-return new A.xb(A.aH(["/",new A.a3O(),"/monte_league",new A.a3P(),"/highlights",new A.a3Q(),"/game_the_week",new A.a3R(),"/injured_the_week",new A.a3S()],t.N,t.Ab),"/","TipFans - Fantasy League",s,!1,null)}}
+return new A.xb(A.aH(["/",new A.a3O(),"/monte_league ",new A.a3P(),"/highlights",new A.a3Q(),"/game_the_week",new A.a3R(),"/injured_the_week",new A.a3S()],t.N,t.Ab),"/","TipFans - Fantasy League",s,!1,null)}}
 A.a3O.prototype={
 $1(a){return B.G7},
 $S:551}

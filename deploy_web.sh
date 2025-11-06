@@ -103,6 +103,16 @@ else
   git checkout "${WEB_BRANCH}" 2>/dev/null || git checkout -b "${WEB_BRANCH}"
 fi
 
+# Tentar fazer pull primeiro para sincronizar com a remota
+echo "🔄 Sincronizando com a branch remota ${WEB_BRANCH}…"
+git fetch origin "${WEB_BRANCH}" 2>/dev/null || true
+
+# Se a branch remota existe, fazer pull com estratégia de sobrescrever local
+if git rev-parse "origin/${WEB_BRANCH}" >/dev/null 2>&1; then
+  echo "📥 Atualizando com conteúdo remoto…"
+  git reset --hard "origin/${WEB_BRANCH}"
+fi
+
 git add -A
 git commit -m "deploy web build - $(date '+%Y-%m-%d %H:%M:%S')" || echo "ℹ️  Nada novo para commitar."
 echo "⬆️  Enviando build para ${WEB_REPO_URL} (${WEB_BRANCH})…"
