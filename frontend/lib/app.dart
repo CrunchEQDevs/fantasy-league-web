@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
-        '/monte_league': (context) => const MonteLeagueScreen(),
+        '/monte_league ': (context) => const MonteLeagueScreen(),
         '/highlights': (context) => const HighlightsScreen(),
         '/game_the_week': (context) => const GameOfTheWeekScreen(),
         '/injured_the_week': (context) => const InjuredTheWeekScreen(),

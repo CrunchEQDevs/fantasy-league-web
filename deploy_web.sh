@@ -5,7 +5,16 @@ set -euo pipefail
 ### CONFIGS — ajuste se precisar
 ### ========================
 WEB_REPO_URL="https://github.com/CrunchEQDevs/fantasy-league-web.git"
-WEB_BRANCH="main"
+
+# Aceita parâmetro para definir branch: ./deploy_web.sh dev ou ./deploy_web.sh main
+# Se não passar nada, usa main por padrão
+if [ "${1:-}" == "dev" ]; then
+  WEB_BRANCH="dev"
+  echo "🔧 Modo DEV ativado - Deploy para branch dev"
+else
+  WEB_BRANCH="main"
+  echo "🚀 Modo PRODUÇÃO - Deploy para branch main"
+fi
 
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 FRONTEND_DIR="$ROOT_DIR/frontend"
@@ -98,3 +107,11 @@ git add -A
 git commit -m "deploy web build - $(date '+%Y-%m-%d %H:%M:%S')" || echo "ℹ️  Nada novo para commitar."
 echo "⬆️  Enviando build para ${WEB_REPO_URL} (${WEB_BRANCH})…"
 git push -u origin "${WEB_BRANCH}"
+
+echo ""
+echo "✅ Deploy concluído com sucesso!"
+if [ "$WEB_BRANCH" == "dev" ]; then
+  echo "🔗 URL de Preview (dev): https://fantasy-league-web-git-dev-cruncheqdevs.vercel.app"
+else
+  echo "🔗 URL de Produção: https://fantasy-league-web-blue.vercel.app"
+fi

@@ -1,71 +1,73 @@
 # 🚀 Deploy na Vercel - Fantasy League
 
-🔹 Passos rápidos no terminal
+## 📋 Opções de Deploy
 
-Sempre na raiz do projeto principal (fantasy-league):
+### ✅ Método Recomendado: Script Automatizado
 
-# 1️⃣ Garanta que está tudo salvo e commitado no projeto principal
-git add .
-git commit -m "atualiza tela de login" 
-git push
+Na raiz do projeto `fantasy-league`, use:
 
-# 2️⃣ Gere a nova versão da web
-cd frontend
-flutter build web --release
-
-# 3️⃣ Vá para a pasta da build
-cd build/web
-
-# 4️⃣ Faça o deploy pro repositório da web
-git add -A
-git commit -m "deploy nova versão web"
-git push -u origin main --force
-
-
-
-Repositorio para o Git
-Repositório Fantasy-League (principal)
-
-git add .
-git commit -m "corrige menu e ajustes gerais"
-git push
-
-
-Repositório fantasy-league-web
-
-cd frontend
-flutter build web --release
-cp vercel.json build/web/
-cd build/web
-git add .
-git commit -m "nova build web"
-git push
-
-
-
+```bash
+# Deploy para PRODUÇÃO (branch main)
 ./deploy_web.sh
 
+# Deploy para DEV (branch dev)
+./deploy_web.sh dev
+```
 
-git push -u origin main --force
+O script faz automaticamente:
+1. Verifica e commita mudanças no repo principal
+2. Gera build Flutter web --release
+3. Copia vercel.json necessário
+4. Faz push para o repositório fantasy-league-web na branch correta
+5. Mostra a URL do deploy
 
+---
 
-Essa é a versao tudo junto.
-#!/bin/bash
+## 🔗 URLs dos Ambientes
+
+- **Produção (main)**: https://fantasy-league-web-blue.vercel.app
+- **Dev (dev)**: https://fantasy-league-web-git-dev-cruncheqdevs.vercel.app
+
+A Vercel cria automaticamente um preview deployment para a branch dev!
+
+---
+
+## 📝 Método Manual (se necessário)
+
+### Deploy Produção
+```bash
 cd frontend
 flutter build web --release
 cd build/web
 git add -A
 git commit -m "deploy web $(date '+%Y-%m-%d %H:%M')"
-git push -u origin main --force
+git push -u origin main
+```
 
+### Deploy Dev
+```bash
+cd frontend
+flutter build web --release
+cd build/web
+git checkout dev  # ou git checkout -b dev se não existir
+git add -A
+git commit -m "deploy dev $(date '+%Y-%m-%d %H:%M')"
+git push -u origin dev
+```
 
+---
 
-verificar - para limpar 
+## 🛠️ Ferramentas Úteis
+
+### Verificar código antes do deploy
+```bash
 cd frontend
 flutter analyze
-flutter run
-Flutter Lint / Dart Analyzer
-
-
-para formatar 
 flutter format .
+```
+
+### Testar localmente
+```bash
+cd frontend
+flutter run -d chrome
+```
