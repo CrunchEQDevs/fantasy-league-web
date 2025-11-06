@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../widgets/appbar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/hero.dart';
-import '../widgets/buttom_home.dart';
 import '../widgets/highlights_widget.dart';
 import '../widgets/footer.dart';
 
@@ -15,6 +14,7 @@ class HomeScreen extends StatelessWidget {
     final isWeb = screenWidth > 900;
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 3, 48, 84), // Fundo azul
       appBar: const CustomAppBar(),
       drawer: isWeb ? null : const CustomDrawer(), // Drawer apenas no mobile
       body: Column(
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                       return Container(
                         width: double.infinity,
                         height: imageHeight,
-                        color: Colors.white,
+                        color: Color.fromARGB(255, 3, 48, 84),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -65,22 +65,7 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
 
-                  // Botão Monte sua Equipa
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 60.0,
-                      horizontal: 50.0,
-                    ),
-                    child: BottomHome(
-                      text: 'Monte sua Equipa',
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/monte_league');
-                      },
-                      backgroundColor: const Color.fromARGB(255, 8, 92, 32),
-                      textColor: Colors.white,
-                    ),
-                  ),
-
+                  
                   // Seção de Highlights
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -96,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 1, 29, 57),
+                                color: Colors.white,
                               ),
                             ),
                             TextButton(
