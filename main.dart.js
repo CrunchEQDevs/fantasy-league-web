@@ -7581,7 +7581,7 @@ a7p:function a7p(){},
 a7q:function a7q(){},
 a7r:function a7r(){},
 a7s:function a7s(){},
-aER(){return!1},
+aER(){return!0},
 aEQ(){return"https://fantasy-league-backend.vercel.app/api/bessocer/"},
 aqV(a,b){var s=A.m(b).h("dB<1,2>"),r=A.kJ(new A.dB(b,s),new A.XP(),s.h("r.E"),t.N).bk(0,"&")
 return(A.aER()?A.aEQ():"https://mediagenerator.besoccerapps.com/widgets/")+a+"/v1?"+r},
