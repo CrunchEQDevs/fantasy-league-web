@@ -7582,7 +7582,7 @@ a7q:function a7q(){},
 a7r:function a7r(){},
 a7s:function a7s(){},
 aER(){return!1},
-aEQ(){return"http://localhost:8000/api/bessocer/"},
+aEQ(){return"https://fantasy-league-backend.vercel.app/api/bessocer/"},
 aqV(a,b){var s=A.m(b).h("dB<1,2>"),r=A.kJ(new A.dB(b,s),new A.XP(),s.h("r.E"),t.N).bk(0,"&")
 return(A.aER()?A.aEQ():"https://mediagenerator.besoccerapps.com/widgets/")+a+"/v1?"+r},
 XP:function XP(){},
@@ -25612,7 +25612,7 @@ s.ch$!==$&&A.ar()
 s.ch$=i
 j=i}s.Vi(new A.BL(p,B.OI,o,j,h))
 s.Hd()},
-aEK(){return"http://localhost:8000"},
+aEK(){return"https://fantasy-league-backend.vercel.app"},
 Xk(a){return A.aEL(a)},
 aEL(a){var s=0,r=A.U(t.a),q,p=2,o=[],n,m,l,k,j,i
 var $async$Xk=A.P(function(b,c){if(b===1){o.push(c)
